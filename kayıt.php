@@ -1,12 +1,4 @@
 <?php
-    include __DIR__ . '/config/Database.php';
-    $database = new Database();
-    $db = $database->connect();
-    $userId = $_GET['id'];
-
-    $sql = $db->prepare("SELECT * FROM students WHERE id = :uid");
-    $sql->execute(['uid'=>$userId]);
-    $student = $sql->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -23,42 +15,39 @@
     <title>Mert Tekra</title>
 </head>
 <body>
-<form ACTION="duzenle_api.php" method="POST" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label  class="form-label">id</label>
-        <input type="number"  value="<?=$student['id']?>" class="form-control" name="id" >
-    </div>
+<form ACTION="kayıt_api.php" method="POST" enctype="multipart/form-data">
+
     <div class="mb-3">
         <label  class="form-label">number</label>
-        <input type="number" value="<?=$student['number']?>" class="form-control" name="number" >
+        <input type="number"  class="form-control" name="number" >
     </div>
     <div class="mb-3">
         <label  class="form-label">name</label>
-        <input type="text" value="<?=$student['name']?>" class="form-control" name="name" >
+        <input type="text"  class="form-control" name="name" >
     </div>
     <div class="mb-3">
         <label  class="form-label">last name</label>
-        <input type="text" value="<?=$student['last_name']?>" class="form-control" name="last_name" >
+        <input type="text"  class="form-control" name="last_name" >
     </div>
     <div class="mb-3">
         <label  class="form-label">gender</label>
-        <input type="text" value="<?=$student['gender']?>" class="form-control" name="gender" >
+        <input type="text"  class="form-control" name="gender" >
     </div>
     <div class="mb-3">
         <label  class="form-label">birthday</label>
-        <input type="date" value="<?=$student['birthday']?>" class="form-control" name="birthday" >
+        <input type="date"  class="form-control" name="birthday" >
     </div>
     <div class="mb-3">
         <label  class="form-label">class</label>
-        <input type="text" value="<?=$student['class']?>" class="form-control" name="class" >
+        <input type="text" class="form-control" name="class" >
     </div>
     <div class="mb-3">
         <label  class="form-label">section</label>
-        <input type="text" value="<?=$student['section']?>" class="form-control" name="section" >
+        <input type="text" class="form-control" name="section" >
     </div>
     <div class="mb-3">
         <label  class="form-label">grade point avarege</label>
-        <input type="number" value="<?=$student['grade_point_avarege']?>" class="form-control" name="grade_point_avarege" >
+        <input type="number" class="form-control" name="grade_point_avarege" >
     </div>
     <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

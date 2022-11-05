@@ -76,7 +76,7 @@ $response = [];
     </tbody>
 </table>
 
-<a class="btn btn-primary" href="#" role="button">Düzenle</a>
+<a class="btn btn-success" href="kayıt.php" role="button">Yeni Kayıt</a>
 </body>
 </html>
 
