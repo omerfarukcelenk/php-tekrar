@@ -5,9 +5,32 @@ include __DIR__ . '/config/Database.php';
 $database = new Database();
 $db = $database->connect();
 
-$sql = 'SELECT * FROM students';
-$students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-$response = [];
+
+
+//$sql = 'SELECT * FROM students';
+//$students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+if (isset($_GET['siralama'])){
+    if ( $_GET['siralama'] == 'asc'){
+        $sql = $sql = 'SELECT * FROM students ORDER BY id ASC';
+        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+
+    }elseif($_GET['siralama'] == 'desc'){
+        $sql = 'SELECT * FROM students ORDER BY id DESC';
+        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
+}else{
+    $sql = 'SELECT * FROM students';
+    $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+
 
 //$response["data"] = [];
 //
@@ -28,7 +51,7 @@ $response = [];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +63,29 @@ $response = [];
     <title>Mert Tekra</title>
 </head>
 <body>
+
+
+<form method="GET"  action="index.php" >
+<!--    <button type="submit" class="btn btn-success" value="asc" name="asc" role="button">ASC</button>-->
+<!--    <button class="btn btn-success" value="desc"  name="desc" role="button">DESC</button>-->
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="siralama" id="ascid" value="asc" checked>
+        <label class="form-check-label" for="ascid">
+            ASC
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="siralama" id="descid" value="desc">
+        <label class="form-check-label" for="descid">
+            DESC
+        </label>
+    </div>
+    <button class="btn btn-success" type="submit" role="button">SIRALA</button>
+
+
+
+</form>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -56,25 +102,26 @@ $response = [];
     </tr>
     </thead>
     <tbody>
-        <?php foreach ($students as $item): ?>
-            <tr>
-                <td><?=$item["id"]?></td>
-                <td><?=$item["number"]?></td>
-                <td><?=$item["name"]?></td>
-                <td><?=$item["last_name"]?></td>
-                <td><?=$item["gender"]?></td>
-                <td><?=$item["birthday"]?></td>
-                <td><?=$item["class"]?></td>
-                <td><?=$item["section"]?></td>
-                <td><?=$item["grade_point_avarege"]?></td>
-                <td>
-                    <a class="btn btn-primary" href='duzenle.php?id=<?=$item["id"]?>' role="button">Düzenle</a>
-                    <a class="btn btn-danger" href='sil.php?id=<?=$item["id"]?>' role="button">Sil</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+    <?php foreach ($students as $item): ?>
+        <tr>
+            <td><?=$item["id"]?></td>
+            <td><?=$item["number"]?></td>
+            <td><?=$item["name"]?></td>
+            <td><?=$item["last_name"]?></td>
+            <td><?=$item["gender"]?></td>
+            <td><?=$item["birthday"]?></td>
+            <td><?=$item["class"]?></td>
+            <td><?=$item["section"]?></td>
+            <td><?=$item["grade_point_avarege"]?></td>
+            <td>
+                <a class="btn btn-primary" href='duzenle.php?id=<?=$item["id"]?>' role="button">Düzenle</a>
+                <a class="btn btn-danger" href='sil.php?id=<?=$item["id"]?>' role="button">Sil</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
+
 
 <a class="btn btn-success" href="kayıt.php" role="button">Yeni Kayıt</a>
 </body>
