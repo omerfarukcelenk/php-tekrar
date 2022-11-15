@@ -1,32 +1,36 @@
 <?php
 
-include __DIR__ . '/config/Database.php';
 
-$database = new Database();
-$db = $database->connect();
+include __DIR__ . '/models/student.php';
+
+
+$student = new Student();
+$students = $student->readAllFromDatabase($_GET['siralama']);
+
+
 
 
 
 //$sql = 'SELECT * FROM students';
 //$students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-if (isset($_GET['siralama'])){
-    if ( $_GET['siralama'] == 'asc'){
-        $sql = $sql = 'SELECT * FROM students ORDER BY id ASC';
-        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-
-    }elseif($_GET['siralama'] == 'desc'){
-        $sql = 'SELECT * FROM students ORDER BY id DESC';
-        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-    }
-
-
-}else{
-    $sql = 'SELECT * FROM students';
-    $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-}
+//if (isset($_GET['siralama'])){
+//    if ( $_GET['siralama'] == 'asc'){
+//        $sql = $sql = 'SELECT * FROM students ORDER BY id ASC';
+//        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+//
+//
+//    }elseif($_GET['siralama'] == 'desc'){
+//        $sql = 'SELECT * FROM students ORDER BY id DESC';
+//        $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+//
+//    }
+//
+//
+//}else{
+//    $sql = 'SELECT * FROM students';
+//    $students = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+//}
 
 
 
